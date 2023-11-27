@@ -203,7 +203,9 @@ function handlePlacesResponse(results,status) {
 
         const filteredResults = results.filter(place => {
             const name = place.name.toLowerCase();
-            return place.rating >= minRating && /^(?!.*\bcoffee\s*shop\b)(?!.*\bkopitiam\b)(?!.*\bfood\s*stall\b)(?!.*\bfood\s*centre\b)(?!.*\beating\s*house\b).*$/i.test(name) && place.types.every(type => type !== 'store');
+            const types = place.types
+            console.log(name, types)
+            return place.rating >= minRating && /^(?!.*\bcoffee\s*shop\b)(?!.*\bkopitiam\b)(?!.*\bfood\s*stall\b)(?!.*\bfood\s*centre\b)(?!.*\beating\s*house\b).*$/i.test(name) && types.every(type => type !== 'store');
         });
 
         if (filteredResults.length > 0) {
