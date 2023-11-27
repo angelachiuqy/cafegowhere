@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CafeGoWhere</title>
+    <link rel="stylesheet" href="./webpage.css"/>
+</head>
+<body>
+    <div class="header">
+        <button id="logout">Logout</button>
+    </div>
+    <div class="container">
+        <div class="overlay-text">
+            <h1 id="welcomeMessage"></h1>
+            <div class="region-container">
+                <div class="region" id="region">
+                    <h2>Please select the region.</h2>
+                    <div class="button-container">
+                       <button id="northButton" onclick="selectRegion('north')">North</button>
+                       <button id="northeastButton" onclick="selectRegion('northeast')">North East</button>
+                       <button id="eastButton" onclick="selectRegion('east')">East</button>
+                       <button id="centralButton" onclick="selectRegion('central')">Central</button>
+                       <button id="westButton" onclick="selectRegion('west')">West</button>
+                    </div>
+                </div>
+                <!-- Dropdown list of district names -->
+                <div class="district" id="district">
+                    <select id="districtSelect" onchange="selectDistrict(this.value)">
+                        <option value="" disabled selected>Select District</option>
+                        <!-- Options for districts will be dynamically populated based on region selection -->
+                    </select>
+                </div>
+                <!-- Improve search by suggesting cafes that are open now -->
+                <div class="opennow" id="opennow">
+                    <input type="checkbox" id="openNowCheckBox"> <!-- The checkbox for 'Open Now' -->
+                    <label for="openNowCheckBox">Open Now</label>
+                </div>
+            </div>
+            <div id="cafeHopButton">
+                <p id="cafeHopText" onclick="suggestCafe()">Let's cafe-hop!</p>
+            </div>
+            <div id="cafeResult">
+            </div>
+        </div>
+    </div>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTkB8D4wmaw-BYvqvoERj5KG98VQ25JA8&libraries=places&callback=initMap">
+    </script>
+    <script src="cafesearch.js"></script>
+</body>
+</html>
