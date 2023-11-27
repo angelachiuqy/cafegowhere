@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const confirmation = confirm('Please log into your account.');
         if (confirmation) {
             // Redirect the user to the login page
-            window.location.href = './login.html';
+            window.location.href = './index.html';
         }
     // If logged in, display a welcome message
     } else {
@@ -237,5 +237,5 @@ function handlePlacesResponse(results,status) {
 function logout() {
     localStorage.removeItem('userName');
     // Redirect the user to the login pagen
-    window.location.href = './login.html';
+    window.location.href = './index.html';
 }
