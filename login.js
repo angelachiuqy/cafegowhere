@@ -1,7 +1,7 @@
 // Mock user data for testing in a development environment
 const users = [
-    { email: 'user1@example.com', password: 'P@ssw0rd1', name: 'User One' },
-    { email: 'user2@example.com', password: 'P@ssw0rd2', name: 'User Two' },
+    { email: 'user1@example.com', password: 'Password1', name: 'User One' },
+    { email: 'user2@example.com', password: 'Password2', name: 'User Two' },
     // Add more users as needed...
 ];
 
