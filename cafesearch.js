@@ -111,7 +111,7 @@ function getDistricts(region) {
     } else if (region === 'northeast') {
         districts = ['Ang Mo Kio', 'Bartley', 'Buangkok', 'Hougang', 'Khatib', 'Lorong Chuan', 'Punggol', 'Sengkang', 'Serangoon', 'Yio Chu Kang']
     } else if (region === 'east') {
-        districts = ['Bedok', 'Changi', 'Eunos', 'Kaki Bukit', 'Kembangan', 'Macpherson', 'Pasir Ris', 'Paya Lebar', 'Simei', 'Tai Seng', 'Tampines', 'Tanah Merah', 'Ubi']
+        districts = ['Bedok', 'Changi', 'Eunos', 'Joo Chiat', 'Kaki Bukit', 'Kembangan', 'Macpherson', 'Pasir Ris', 'Paya Lebar', 'Simei', 'Tai Seng', 'Tampines', 'Tanah Merah', 'Ubi']
     } else if (region === 'central') {
         districts = ['Bayfront', 'Bishan', 'Bugis', 'Bukit Timah', 'Chinatown', 'City Hall', 'Clarke Quay', 'Dhoby Ghaut', 'Farrer Park', 'Harbourfront', 'Kallang', 'Lavender', 'Little India', 'Marina Bay', 'Newton', 'Novena', 'Outram Park', 'Orchard', 'Potong Pasir', 'Promenade', 'Queenstown', 'Raffles Place', 'Redhill', 'Somerset', 'Tanjong Pagar', 'Tiong Bahru', 'Toa Payoh']
     } else if (region === 'west') {
@@ -163,7 +163,7 @@ function generateRequest() {
     const openNowCheckbox = document.getElementById('openNowCheckBox');
     const request = {
         bounds: getRegionLatLng(selectedRegion),
-        region: 'sg', // Assuming 'sg' is the country code for Singapore
+        region: 'sg', 
         type: ['cafe'],
         query: `cafe in ${selectedDistrict} Singapore`,
     };
@@ -185,10 +185,10 @@ function suggestCafe() {
 
     const cafeResult = document.getElementById('cafeResult');
     cafeResult.innerHTML = '';
-
+    // Creates a new instance of the Google Maps PlacesService
     const service = new google.maps.places.PlacesService(document.createElement('div'));
     const request = generateRequest();
-
+    // Uses the textSearch method of the PlacesService to send the request and specifies a callback function (handlePlacesResponse) to handle the API response
     service.textSearch(request, handlePlacesResponse);
 }
 
@@ -203,7 +203,10 @@ function handlePlacesResponse(results,status) {
 
         const filteredResults = results.filter(place => {
             const name = place.name.toLowerCase();
+            // Check if the place meets certain criteria
             const types = place.types
+            // Check if the rating of the place is greater than or equal to minRating
+            // Check if the name does not contain specific keywords related to food establishments
             return place.rating >= minRating && /^(?!.*\bcoffee\s*shop\b)(?!.*\bkopitiam\b)(?!.*\bfood\s*stall\b)(?!.*\bfood\s*centre\b)(?!.*\beating\s*house\b).*$/i.test(name) && (!!types ? types.every(type => type !== 'store') : true);
         });
 
@@ -234,9 +237,23 @@ function handlePlacesResponse(results,status) {
     cafeResult.style.display = 'block';
 }
 
+// Function to show the Faves section
+function showFaves() {
+    window.location.href = './faves.html';
+}
+
+// Function to show the Explore section
+function showExplore() {
+    window.location.href = './cafesearch.html';
+}
 // Logs user out by removing 'userName' from local storage
 function logout() {
     localStorage.removeItem('userName');
     // Redirect the user to the login pagen
     window.location.href = './index.html';
 }
+
+// Add event listeners to the buttons
+document.getElementById("faves").addEventListener("click", showFaves);
+document.getElementById("explore").addEventListener("click", showExplore);
+document.getElementById("logout").addEventListener("click", logout);
